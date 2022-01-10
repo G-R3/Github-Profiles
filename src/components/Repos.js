@@ -14,17 +14,26 @@ export default function Repos({ repos }) {
                             {repo.name}
                         </h2>
                         <div className="flex gap-5">
-                            <span className="flex  items-center gap-1 font-semibold">
+                            <span className="flex justify-center items-center gap-1 font-semibold relative group">
                                 <RepoForkedIcon />
                                 {repo.fork_count}
+                                <span className="text-sm bottom-7 absolute w-max scale-0 group-hover:scale-100 transition-transform tracking-wide bg-slate-100 p-2 rounded-md track-wide">
+                                    Fork
+                                </span>
                             </span>
-                            <span className="flex  items-center gap-1 font-semibold">
+                            <span className="flex justify-center items-center gap-1 font-semibold relative group">
                                 <EyeIcon verticalAlign="middle" />
                                 {repo.subscribers_count}
+                                <span className="text-sm bottom-7 absolute w-max scale-0 group-hover:scale-100 transition-transform tracking-wide bg-slate-100 p-2 rounded-md track-wide">
+                                    Watch
+                                </span>
                             </span>
-                            <span className="flex  items-center gap-1 font-semibold">
+                            <span className="flex justify-center items-center gap-1 font-semibold relative group">
                                 <StarIcon verticalAlign="middle" />
                                 {repo.stargazers_count}
+                                <span className="text-sm bottom-7 absolute w-max scale-0 group-hover:scale-100 transition-transform tracking-wide bg-slate-100 p-2 rounded-md track-wide">
+                                    Star
+                                </span>
                             </span>
                         </div>
                     </div>
