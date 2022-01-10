@@ -3,11 +3,11 @@ import { StarIcon, EyeIcon, RepoForkedIcon } from "@primer/octicons-react";
 
 export default function Repos({ repos }) {
     return (
-        <div className="grid grid-cols-1 gap-5 max-w-lg my-10 mx-auto px-5 md:grid-cols-3 md:max-w-7xl">
+        <div className="grid grid-cols-1 gap-5 my-10 mx-auto px-5 max-w-3xl lg:grid-cols-3 lg:max-w-7xl transition-all">
             {repos.map((repo) => (
                 <div
                     key={repo.id}
-                    className="bg-slate-50 shadow-md p-2 flex flex-col gap-2"
+                    className="bg-slate-50 shadow-md py-3 px-4 flex flex-col gap-2"
                 >
                     <div className="flex justify-between items-center">
                         <h2 className="text-lg font-semibold tracking-wide">
@@ -31,7 +31,7 @@ export default function Repos({ repos }) {
                     <p>{repo.description}</p>
                     <div className="mt-5 flex gap-2">
                         {repo.topics.map((topic) => (
-                            <span className="bg-blue-200 p-1 rounded-md text-xs text-blue-700 tracking-wide">
+                            <span className="bg-blue-200 py-1 px-2 rounded-md text-xs text-blue-700">
                                 {topic}
                             </span>
                         ))}
