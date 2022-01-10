@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import User from "./User";
+import Repos from "./Repos";
 import { getUser, getUserRepos } from "../api/api";
 
 function App() {
@@ -35,8 +36,11 @@ function App() {
                 </button>
             </form>
 
-            {user ? (
-                <User user={user} />
+            {user && repos ? (
+                <>
+                    <User user={user} />
+                    <Repos repos={repos} />
+                </>
             ) : (
                 <p className="text-slate-400 text-xl text-center">
                     Search for User
