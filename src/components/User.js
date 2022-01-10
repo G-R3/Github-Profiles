@@ -2,20 +2,20 @@ import React from "react";
 
 export default function User({ user }) {
     return (
-        <div className="px-5 pt-5">
+        <div className="px-5 pt-5 flex flex-col items-center">
             <a
                 href={user.page}
                 target={"_blank"}
                 rel="noreferrer"
-                className="flex flex-col items-center"
+                className="group"
             >
                 <img
                     src={user.avatar}
                     alt={`${user.login} github avatar`}
-                    className="rounded-full w-60"
+                    className="rounded-full w-60 shadow-md group-hover:shadow-lg transition-shadow"
                 />
-                <p className="text-xl font-semibold mt-2">{user.username}</p>
             </a>
+            <h1 className="text-xl font-semibold mt-2">{user.username}</h1>
         </div>
     );
 }
