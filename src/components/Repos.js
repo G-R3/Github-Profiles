@@ -1,5 +1,5 @@
 import React from "react";
-import { StarIcon, EyeIcon, RepoForkedIcon } from "@primer/octicons-react";
+import { StarIcon, RepoForkedIcon } from "@primer/octicons-react";
 
 export default function Repos({ repos }) {
     return (
@@ -10,37 +10,33 @@ export default function Repos({ repos }) {
                     className="bg-slate-50 shadow-md py-3 px-4 flex flex-col gap-2"
                 >
                     <div className="flex justify-between items-center">
-                        <h2 className="text-lg font-semibold tracking-wide">
+                        <h3 className="text-lg font-semibold tracking-wide">
                             {repo.name}
-                        </h2>
+                        </h3>
                         <div className="flex gap-5">
                             <span className="flex justify-center items-center gap-1 font-semibold relative group">
                                 <RepoForkedIcon />
                                 {repo.fork_count}
                                 <span className="text-sm bottom-7 absolute w-max scale-0 group-hover:scale-100 transition-transform tracking-wide bg-slate-100 p-2 rounded-md track-wide">
-                                    Fork
-                                </span>
-                            </span>
-                            <span className="flex justify-center items-center gap-1 font-semibold relative group">
-                                <EyeIcon verticalAlign="middle" />
-                                {repo.subscribers_count}
-                                <span className="text-sm bottom-7 absolute w-max scale-0 group-hover:scale-100 transition-transform tracking-wide bg-slate-100 p-2 rounded-md track-wide">
-                                    Watch
+                                    Forks
                                 </span>
                             </span>
                             <span className="flex justify-center items-center gap-1 font-semibold relative group">
                                 <StarIcon verticalAlign="middle" />
                                 {repo.stargazers_count}
                                 <span className="text-sm bottom-7 absolute w-max scale-0 group-hover:scale-100 transition-transform tracking-wide bg-slate-100 p-2 rounded-md track-wide">
-                                    Star
+                                    Stars
                                 </span>
                             </span>
                         </div>
                     </div>
-                    <p>{repo.description}</p>
-                    <div className="mt-5 flex gap-2">
-                        {repo.topics.map((topic) => (
-                            <span className="bg-blue-200 py-1 px-2 rounded-md text-xs text-blue-700">
+                    <p className="mb-5">{repo.description}</p>
+                    <div className="mt-auto flex gap-2">
+                        {repo.topics.map((topic, index) => (
+                            <span
+                                key={index}
+                                className="bg-blue-200 py-1 px-2 rounded-md text-xs text-blue-700"
+                            >
                                 {topic}
                             </span>
                         ))}
