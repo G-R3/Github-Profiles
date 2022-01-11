@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { SearchIcon } from "@primer/octicons-react";
 import User from "./User";
 import Repos from "./Repos";
 import { getUser, getUserRepos } from "../api/api";
@@ -8,11 +9,14 @@ function App() {
     const [repos, setRepos] = useState("");
     const [query, setQuery] = useState("");
     const [input, setInput] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (!query) return;
+        setIsLoading(true);
         getUser(query).then((user) => setUser(user));
         getUserRepos(query).then((repos) => setRepos(repos));
+        setIsLoading(false);
     }, [query]);
 
     function handleSubmit(evt) {
@@ -20,32 +24,48 @@ function App() {
         setQuery(input);
         setInput("");
     }
+
+    let display = (
+        <p className="text-slate-500 text-xl text-center font-semibold">
+            Search for User
+        </p>
+    );
+    if (isLoading) {
+        display = (
+            <p className="text-slate-500 text-xl text-center font-semibold">
+                Loading...
+            </p>
+        );
+    } else if (user && repos) {
+        display = (
+            <div>
+                <User user={user} />
+                <Repos repos={repos} />
+            </div>
+        );
+    }
+
     return (
         <div className="App">
-            <form action="" onSubmit={handleSubmit}>
-                <input
-                    type="search"
-                    name="search"
-                    id="search"
-                    value={input}
-                    onChange={(evt) => setInput(evt.target.value)}
-                    className="border-2 border-rose-400"
-                />
-                <button className="bg-neutral-800 text-white p-2">
-                    Search
-                </button>
+            <form onSubmit={handleSubmit} className="flex justify-end p-5">
+                <div className="flex">
+                    <input
+                        type="search"
+                        name="search"
+                        id="search"
+                        value={input}
+                        onChange={(evt) => setInput(evt.target.value)}
+                        className="border-2 p-2 rounded-l-md rounded-bl-md"
+                    />
+                    <button
+                        className="bg-neutral-800 px-2 text-white rounded-tr-md rounded-br-md flex
+                    items-center"
+                    >
+                        <SearchIcon />
+                    </button>
+                </div>
             </form>
-
-            {user && repos ? (
-                <>
-                    <User user={user} />
-                    <Repos repos={repos} />
-                </>
-            ) : (
-                <p className="text-slate-400 text-xl text-center">
-                    Search for User
-                </p>
-            )}
+            {display}
         </div>
     );
 }
