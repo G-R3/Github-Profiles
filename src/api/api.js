@@ -1,5 +1,5 @@
 const getUser = async (query) => {
-    let response = await fetch(`  https://api.github.com/users/${query}`);
+    let response = await fetch(`https://api.github.com/users/${query}`);
     let data = await response.json();
 
     let [followers, following] = await getFollows(query);
@@ -19,11 +19,11 @@ const getUser = async (query) => {
 
 const getUserRepos = async (user) => {
     let response = await fetch(
-        `https://api.github.com/search/repositories?q=user:${user}+sort:stars&per_page=6`,
+        `https://api.github.com/users/${user}/repos?per_page=100`,
     );
     let data = await response.json();
 
-    let repos = data.items.map((repo) => ({
+    let repos = data.map((repo) => ({
         id: repo.id,
         name: repo.name,
         description: repo.description,
@@ -48,21 +48,5 @@ const getFollows = async (user) => {
 
     return [followers.length, following.length];
 };
-
-// const getRepoDetails = async (user, repos) => {
-//     let promises = [];
-
-//     for (let i = 0; i < repos.length; i++) {
-//         promises.push(
-//             fetch(`https://api.github.com/repos/${user}/${repos[i]}`),
-//         );
-//     }
-
-//     let data = await Promise.all(promises).then((responses) => {
-//         return Promise.all(responses.map((res) => res.json()));
-//     });
-
-//     return data.map((repo) => ({}));
-// };
 
 export { getUser, getUserRepos };
