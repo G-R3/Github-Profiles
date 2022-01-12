@@ -60,8 +60,9 @@ export default function Repos({ repos }) {
                             </div>
                         </div>
                         <p className="mb-5">{repo.description}</p>
-                        <div className="mt-auto flex justify-between">
-                            <div className="flex gap-2">
+                        <div className="mt-auto flex flex-col gap-5">
+                            <span className="text-sm">{repo.language}</span>
+                            <div className="flex flex-wrap gap-2">
                                 {repo.topics.map((topic, index) => (
                                     <span
                                         key={index}
@@ -71,7 +72,6 @@ export default function Repos({ repos }) {
                                     </span>
                                 ))}
                             </div>
-                            <span>{repo.language}</span>
                         </div>
                     </div>
                 ))}

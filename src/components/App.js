@@ -32,14 +32,14 @@ function App() {
     }
 
     let display = (
-        <p className="text-slate-500 text-xl text-center font-semibold">
+        <p className="mt-8 text-slate-500 text-xl text-center font-semibold">
             Search for User
         </p>
     );
 
     if (isLoading) {
         display = (
-            <p className="text-slate-500 text-xl text-center font-semibold">
+            <p className="mt-8 text-slate-500 text-xl text-center font-semibold">
                 Loading...
             </p>
         );

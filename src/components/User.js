@@ -20,9 +20,11 @@ export default function User({ user }) {
             <span>
                 Joined on: {new Date(`${user.createdAt}`).toLocaleDateString()}
             </span>
-            <span>
-                Followers: {user.followers} | Following: {user.following}
-            </span>
+            <div className="bg-slate-50 p-2 rounded-md flex justify-center items-center gap-3 h-10">
+                <span>Followers: {user.followers}</span>
+                <div className="bg-black w-px h-full rounded-md"></div>
+                <span>Following:{user.following}</span>
+            </div>
         </div>
     );
 }
