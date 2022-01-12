@@ -13,10 +13,16 @@ function App() {
 
     useEffect(() => {
         if (!query) return;
+        const fetchData = async () => {
+            let user = await getUser(query);
+            let repos = await getUserRepos(query);
+            setUser(user);
+            setRepos(repos);
+            setIsLoading(false);
+        };
+
         setIsLoading(true);
-        getUser(query).then((user) => setUser(user));
-        getUserRepos(query).then((repos) => setRepos(repos));
-        setIsLoading(false);
+        fetchData();
     }, [query]);
 
     function handleSubmit(evt) {
@@ -30,6 +36,7 @@ function App() {
             Search for User
         </p>
     );
+
     if (isLoading) {
         display = (
             <p className="text-slate-500 text-xl text-center font-semibold">
