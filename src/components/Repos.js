@@ -4,14 +4,19 @@ import { useEffect, useState } from "react/cjs/react.development";
 
 export default function Repos({ repos }) {
     const [filter, setFilter] = useState("stars");
-    const [sortedRepos, setSortedRepos] = useState();
-    useEffect(() => {
-        let sortedRepos = repos.sort(
-            (a, b) => b.stargazers_count - a.stargazers_count,
-        );
+    const [sortedRepos, setSortedRepos] = useState(repos);
 
-        setSortedRepos(sortedRepos);
-    }, [repos]);
+    useEffect(() => {
+        const sortRepos = [...repos].sort((a, b) => {
+            // this will also include repos the user forked. the solution would be to filter them
+            if (filter === "forks") {
+                return b.fork_count - a.fork_count;
+            }
+            return b.stargazers_count - a.stargazers_count;
+        });
+
+        setSortedRepos(sortRepos);
+    }, [filter, repos]);
 
     return (
         <div className="px-5 my-10 max-w-3xl lg:max-w-7xl mx-auto ">
@@ -25,11 +30,10 @@ export default function Repos({ repos }) {
                 >
                     <option value="stars">Stars</option>
                     <option value="forks">Forks</option>
-                    <option value="size">Size</option>
                 </select>
             </div>
             <div className="grid grid-cols-1 gap-5 lg:grid-cols-3  transition-all">
-                {sortedRepos.map((repo) => (
+                {sortedRepos.slice(0, 6).map((repo) => (
                     <div
                         key={repo.id}
                         className="bg-slate-50 shadow-md py-3 px-4 flex flex-col gap-2"
