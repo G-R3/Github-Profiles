@@ -1,12 +1,35 @@
 import React from "react";
 import { StarIcon, RepoForkedIcon } from "@primer/octicons-react";
+import { useEffect, useState } from "react/cjs/react.development";
 
 export default function Repos({ repos }) {
+    const [filter, setFilter] = useState("stars");
+    const [sortedRepos, setSortedRepos] = useState();
+    useEffect(() => {
+        let sortedRepos = repos.sort(
+            (a, b) => b.stargazers_count - a.stargazers_count,
+        );
+
+        setSortedRepos(sortedRepos);
+    }, [repos]);
+
     return (
         <div className="px-5 my-10 max-w-3xl lg:max-w-7xl mx-auto ">
-            <h2 className="text-xl font-semibold mb-3">REPOS</h2>
+            <div className="flex gap-3 mb-3">
+                <h2 className="text-xl font-semibold">Repos</h2>
+                <select
+                    name="filter"
+                    id="filter"
+                    value={filter}
+                    onChange={(evt) => setFilter(evt.target.value)}
+                >
+                    <option value="stars">Stars</option>
+                    <option value="forks">Forks</option>
+                    <option value="size">Size</option>
+                </select>
+            </div>
             <div className="grid grid-cols-1 gap-5 lg:grid-cols-3  transition-all">
-                {repos.map((repo) => (
+                {sortedRepos.map((repo) => (
                     <div
                         key={repo.id}
                         className="bg-slate-50 shadow-md py-3 px-4 flex flex-col gap-2"

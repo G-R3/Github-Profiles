@@ -18,7 +18,7 @@ export default function User({ user }) {
             <h1 className="text-xl font-semibold mt-2">{user.name}</h1>
             <span>{user.login}</span>
             <span>
-                Join on: {new Date(`${user.createdAt}`).toLocaleDateString()}
+                Joined on: {new Date(`${user.createdAt}`).toLocaleDateString()}
             </span>
             <span>
                 Followers: {user.followers} | Following: {user.following}

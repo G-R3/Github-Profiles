@@ -54,7 +54,10 @@ function App() {
 
     return (
         <div className="App">
-            <form onSubmit={handleSubmit} className="flex justify-end p-5">
+            <form
+                onSubmit={handleSubmit}
+                className="flex justify-end p-5 max-w-7xl"
+            >
                 <div className="flex">
                     <input
                         type="search"
